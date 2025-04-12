@@ -17,15 +17,18 @@ test.describe('Uchi.ru widget ', () => {
   test('opens', async ({page}) => {
     await widgetPage.openWidget();
 
-    await expect(widgetPage.getWidgetBody()).toBeVisible()
+    await expect(widgetPage.getWidgetBody()).toBeVisible();
   });
 
   test('has correct title', async ({ page }) => {
     await widgetPage.openWidget();
+	
+	  await expect(widgetPage.getWidgetBody()).toBeVisible();
 
     const articles = await widgetPage.getPopularArticles();
+	  await expect(articles).toHaveCount(5);
 
-    await articles[0].click();
+    await articles.nth(1).click();
 
     await widgetPage.clickWriteToUs();
 
